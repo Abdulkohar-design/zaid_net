@@ -129,7 +129,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
       <div className="flex gap-2">
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline" size="sm" className="flex-1">
+            <Button type="button" variant="outline" size="sm" className="flex-1">
               <MapPin className="h-4 w-4 mr-2" />
               Pilih di Peta
             </Button>
@@ -149,6 +149,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
                   onKeyPress={(e) => e.key === 'Enter' && searchLocation()}
                 />
                 <Button 
+                  type="button"
                   onClick={searchLocation} 
                   disabled={isLoading}
                   variant="outline"
@@ -156,6 +157,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
                   <Search className="h-4 w-4" />
                 </Button>
                 <Button 
+                  type="button"
                   onClick={getCurrentLocation} 
                   disabled={isLoading}
                   variant="outline"
@@ -228,6 +230,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
               {/* Quick Location Buttons */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 <Button 
+                  type="button"
                   variant="outline" 
                   size="sm"
                   onClick={() => {
@@ -238,6 +241,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
                   Jakarta Pusat
                 </Button>
                 <Button 
+                  type="button"
                   variant="outline" 
                   size="sm"
                   onClick={() => {
@@ -248,6 +252,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
                   Bandung
                 </Button>
                 <Button 
+                  type="button"
                   variant="outline" 
                   size="sm"
                   onClick={() => {
@@ -258,6 +263,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
                   Yogyakarta
                 </Button>
                 <Button 
+                  type="button"
                   variant="outline" 
                   size="sm"
                   onClick={() => {
@@ -271,10 +277,10 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
 
               {/* Action Buttons */}
               <div className="flex gap-2 justify-end">
-                <Button variant="outline" onClick={() => setIsOpen(false)}>
+                <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
                   Batal
                 </Button>
-                <Button onClick={handleSaveLocation}>
+                <Button type="button" onClick={handleSaveLocation}>
                   <MapPin className="h-4 w-4 mr-2" />
                   Simpan Lokasi
                 </Button>
@@ -285,6 +291,7 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
 
         {(latitude && longitude) && (
           <Button 
+            type="button"
             variant="outline" 
             size="sm"
             onClick={() => window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_blank')}
