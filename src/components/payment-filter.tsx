@@ -76,11 +76,11 @@ export function PaymentFilter({ customers }: PaymentFilterProps) {
     const exportData = filteredPayments.map((payment, index) => ({
       'No': index + 1,
       'Nama Pelanggan': payment.name,
-      'Paket Internet': payment.packageName || '-',
+              'Paket Internet': payment.package_name || '-',
       'Nominal': payment.amount,
               'Tanggal Bayar': formatDate(payment.created_at),
               'Jatuh Tempo': formatDate(payment.due_date),
-      'No. WhatsApp': payment.phoneNumber || '-',
+              'No. WhatsApp': payment.phone_number || '-',
       'Alamat': payment.address || '-',
       'Catatan': payment.notes || '-'
     }));
@@ -195,12 +195,12 @@ export function PaymentFilter({ customers }: PaymentFilterProps) {
                       <tr key={payment.id} className="hover:bg-gray-50">
                         <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
                         <td className="border border-gray-300 px-4 py-2 font-medium">{payment.name}</td>
-                        <td className="border border-gray-300 px-4 py-2">{payment.packageName || '-'}</td>
+                        <td className="border border-gray-300 px-4 py-2">{payment.package_name || '-'}</td>
                         <td className="border border-gray-300 px-4 py-2 font-medium text-green-600">
                           {formatCurrency(payment.amount)}
                         </td>
                         <td className="border border-gray-300 px-4 py-2">{formatDate(payment.created_at)}</td>
-                        <td className="border border-gray-300 px-4 py-2">{payment.phoneNumber || '-'}</td>
+                        <td className="border border-gray-300 px-4 py-2">{payment.phone_number || '-'}</td>
                       </tr>
                     ))}
                   </tbody>

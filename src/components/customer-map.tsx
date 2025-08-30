@@ -196,7 +196,7 @@ export function CustomerMap({ customers }: CustomerMapProps) {
 
                   <div className="flex items-center justify-between mt-4">
                     <div className="text-sm text-muted-foreground">
-                      Paket: {customer.packageName || 'Tidak ada'} | 
+                      Paket: {customer.package_name || 'Tidak ada'} | 
                       Jatuh Tempo: {formatDate(customer.due_date)}
                     </div>
 
@@ -232,8 +232,8 @@ export function CustomerMap({ customers }: CustomerMapProps) {
                               <div>
                                 <h4 className="font-medium">Informasi Pelanggan</h4>
                                 <p>Nama: {customer.name}</p>
-                                <p>Paket: {customer.packageName || '-'}</p>
-                                <p>WhatsApp: {customer.phoneNumber || '-'}</p>
+                                <p>Paket: {customer.package_name || '-'}</p>
+                                <p>WhatsApp: {customer.phone_number || '-'}</p>
                                 <p>Status: {customer.status === 'paid' ? 'Lunas' : 'Belum Bayar'}</p>
                               </div>
                               <div>

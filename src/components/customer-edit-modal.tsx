@@ -80,8 +80,8 @@ export function CustomerEditModal({ customer, isOpen, onClose, onSave }: Custome
             <Input
               type="tel"
               placeholder="08xxxxxxxxxx"
-              value={formData.phoneNumber || ''}
-              onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+              value={formData.phone_number || ''}
+              onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
             />
           </div>
           <div>
@@ -96,8 +96,8 @@ export function CustomerEditModal({ customer, isOpen, onClose, onSave }: Custome
             <Label>Paket Internet</Label>
             <Input
               placeholder="Nama paket (misal: 10 Mbps, 20 Mbps)"
-              value={formData.packageName || ''}
-              onChange={(e) => setFormData({ ...formData, packageName: e.target.value })}
+              value={formData.package_name || ''}
+              onChange={(e) => setFormData({ ...formData, package_name: e.target.value })}
             />
           </div>
           <LocationPicker
@@ -108,8 +108,8 @@ export function CustomerEditModal({ customer, isOpen, onClose, onSave }: Custome
           />
           
           <PhotoUpload
-            currentPhotoUrl={formData.photoUrl}
-            onPhotoChange={(photoUrl) => setFormData({ ...formData, photoUrl: photoUrl || '' })}
+            currentPhotoUrl={formData.photo_url}
+            onPhotoChange={(photoUrl) => setFormData({ ...formData, photo_url: photoUrl || '' })}
             customerName={formData.name || 'Pelanggan'}
           />
           

@@ -7,12 +7,12 @@ export interface CustomerBill {
   notes?: string;
   due_date: Date;
   created_at: Date;
-  phoneNumber?: string;
+  phone_number?: string;
   address?: string;
-  packageName?: string;
+  package_name?: string;
   latitude?: number;
   longitude?: number;
-  photoUrl?: string;
+  photo_url?: string;
 }
 
 export interface BillingStats {

@@ -24,10 +24,10 @@ export function CustomerAddModal({ isOpen, onClose, onAdd }: CustomerAddModalPro
     amount: 0,
     status: 'pending' as 'paid' | 'pending',
     notes: '',
-    phoneNumber: '',
+    phone_number: '',
     address: '',
-    packageName: '',
-    photoUrl: '',
+    package_name: '',
+    photo_url: '',
     latitude: undefined,
     longitude: undefined
   });
@@ -38,7 +38,7 @@ export function CustomerAddModal({ isOpen, onClose, onAdd }: CustomerAddModalPro
       ...formData,
       amount: Number(formData.amount), // Ensure amount is a number
     });
-    setFormData({ name: '', amount: 0, status: 'pending', notes: '', phoneNumber: '', address: '', packageName: '', photoUrl: '', latitude: undefined, longitude: undefined });
+    setFormData({ name: '', amount: 0, status: 'pending', notes: '', phone_number: '', address: '', package_name: '', photo_url: '', latitude: undefined, longitude: undefined });
     onClose();
   };
 
@@ -83,8 +83,8 @@ export function CustomerAddModal({ isOpen, onClose, onAdd }: CustomerAddModalPro
             <Input
               type="tel"
               placeholder="08xxxxxxxxxx"
-              value={formData.phoneNumber}
-              onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+              value={formData.phone_number}
+              onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
             />
           </div>
           <div>
@@ -99,8 +99,8 @@ export function CustomerAddModal({ isOpen, onClose, onAdd }: CustomerAddModalPro
             <Label>Paket Internet</Label>
             <Input
               placeholder="Nama paket (misal: 10 Mbps, 20 Mbps)"
-              value={formData.packageName}
-              onChange={(e) => setFormData({ ...formData, packageName: e.target.value })}
+              value={formData.package_name}
+              onChange={(e) => setFormData({ ...formData, package_name: e.target.value })}
             />
           </div>
           <LocationPicker
@@ -111,8 +111,8 @@ export function CustomerAddModal({ isOpen, onClose, onAdd }: CustomerAddModalPro
           />
           
           <PhotoUpload
-            currentPhotoUrl={formData.photoUrl}
-            onPhotoChange={(photoUrl) => setFormData({ ...formData, photoUrl: photoUrl || '' })}
+            currentPhotoUrl={formData.photo_url}
+            onPhotoChange={(photoUrl) => setFormData({ ...formData, photo_url: photoUrl || '' })}
             customerName={formData.name || 'Pelanggan Baru'}
           />
           

@@ -97,11 +97,11 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
     const exportData = overdueData.allOverdue.map((customer, index) => ({
       'No': index + 1,
       'Nama Pelanggan': customer.name,
-      'Paket Internet': customer.packageName || '-',
+              'Paket Internet': customer.package_name || '-',
       'Nominal': customer.amount,
       'Jatuh Tempo': formatDate(customer.due_date),
       'Hari Terlambat': customer.daysDiff,
-      'No. WhatsApp': customer.phoneNumber || '-',
+              'No. WhatsApp': customer.phone_number || '-',
       'Alamat': customer.address || '-',
       'Catatan': customer.notes || '-'
     }));
@@ -135,11 +135,11 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
   const handleBulkWhatsApp = (customers: any[]) => {
     customers.forEach((customer, index) => {
       setTimeout(() => {
-        if (customer.phoneNumber) {
+        if (customer.phone_number) {
           const message = `🚨 *REMINDER TAGIHAN TERLAMBAT*
 
 👤 *Nama:* ${customer.name}
-📦 *Paket:* ${customer.packageName || 'Paket Internet'}
+      📦 *Paket:* ${customer.package_name || 'Paket Internet'}
 💰 *Nominal:* ${formatCurrency(customer.amount)}
 📅 *Jatuh Tempo:* ${formatDate(customer.due_date)}
 ⏰ *Terlambat:* ${customer.daysDiff} hari
@@ -156,7 +156,7 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
 ---
 *ZaidNet - Layanan Internet Terpercaya*`;
 
-          const formattedPhone = customer.phoneNumber.replace(/\D/g, '');
+          const formattedPhone = customer.phone_number.replace(/\D/g, '');
           const phone = formattedPhone.startsWith('0') ? '62' + formattedPhone.slice(1) : formattedPhone;
           const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
           window.open(whatsappUrl, '_blank');
@@ -166,7 +166,7 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
 
     toast({
       title: "WhatsApp Bulk Reminder",
-      description: `Mengirim reminder ke ${customers.filter(c => c.phoneNumber).length} pelanggan`,
+              description: `Mengirim reminder ke ${customers.filter(c => c.phone_number).length} pelanggan`,
     });
   };
 
@@ -217,7 +217,7 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
               variant="outline" 
               size="sm" 
               className="w-full"
-              disabled={overdueData.allOverdue.filter(c => c.phoneNumber).length === 0}
+              disabled={overdueData.allOverdue.filter(c => c.phone_number).length === 0}
             >
               <Phone className="h-4 w-4 mr-2" />
               Bulk WA Reminder
@@ -249,10 +249,10 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
                     variant="outline" 
                     size="sm" 
                     className="w-full"
-                    disabled={customers.filter(c => c.phoneNumber).length === 0}
+                    disabled={customers.filter(c => c.phone_number).length === 0}
                   >
                     <Phone className="h-4 w-4 mr-1" />
-                    Reminder ({customers.filter(c => c.phoneNumber).length})
+                    Reminder ({customers.filter(c => c.phone_number).length})
                   </Button>
                 </div>
               )}
@@ -286,7 +286,7 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
                     <tr key={customer.id} className="hover:bg-gray-50">
                       <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
                       <td className="border border-gray-300 px-4 py-2 font-medium">{customer.name}</td>
-                      <td className="border border-gray-300 px-4 py-2">{customer.packageName || '-'}</td>
+                      <td className="border border-gray-300 px-4 py-2">{customer.package_name || '-'}</td>
                       <td className="border border-gray-300 px-4 py-2 font-medium text-red-600">
                         {formatCurrency(customer.amount)}
                       </td>

@@ -32,7 +32,7 @@ export function WhatsAppButton({ customer, variant = "outline", size = "sm" }: W
     return `🌐 *TAGIHAN INTERNET - ZAIDNET*
 
 👤 *Nama:* ${customer.name}
-📦 *Paket:* ${customer.packageName || 'Paket Internet'}
+      📦 *Paket:* ${customer.package_name || 'Paket Internet'}
 💰 *Nominal:* ${amount}
 📅 *Jatuh Tempo:* ${dueDate}
 📍 *Status:* ${statusText}
@@ -56,7 +56,7 @@ ${customer.status === 'pending'
   };
 
   const handleWhatsAppClick = () => {
-    if (!customer.phoneNumber || customer.phoneNumber.trim() === '') {
+    if (!customer.phone_number || customer.phone_number.trim() === '') {
       toast({
         title: "Nomor WhatsApp Tidak Tersedia",
         description: "Pelanggan ini belum memiliki nomor WhatsApp. Silakan edit data pelanggan terlebih dahulu.",
@@ -66,7 +66,7 @@ ${customer.status === 'pending'
     }
 
     // Format nomor telepon (hapus karakter non-digit, tambah 62 jika diawali 0)
-    let formattedPhone = customer.phoneNumber.replace(/\D/g, '');
+          let formattedPhone = customer.phone_number.replace(/\D/g, '');
     if (formattedPhone.startsWith('0')) {
       formattedPhone = '62' + formattedPhone.slice(1);
     } else if (!formattedPhone.startsWith('62')) {

@@ -123,12 +123,12 @@ function Index() {
         notes: item.notes || '',
         due_date: item.due_date,
         // Field baru - safe handling untuk data lama
-        phoneNumber: item.phone_number || '',
+        phone_number: item.phone_number || '',
         address: item.address || '',
-        packageName: item.package_name || '',
+        package_name: item.package_name || '',
         latitude: item.latitude || undefined,
         longitude: item.longitude || undefined,
-        photoUrl: item.photo_url || '',
+        photo_url: item.photo_url || '',
       }));
       setCustomers(customersData);
 
@@ -207,12 +207,12 @@ function Index() {
           status: customer.status,
           notes: customer.notes || null,
           // Field baru - insert null jika kosong untuk kompatibilitas
-          phone_number: customer.phoneNumber || null,
+          phone_number: customer.phone_number || null,
           address: customer.address || null,
-          package_name: customer.packageName || null,
+          package_name: customer.package_name || null,
           latitude: customer.latitude || null,
           longitude: customer.longitude || null,
-          photo_url: customer.photoUrl || null,
+          photo_url: customer.photo_url || null,
           user_id: user.id,
           created_at: new Date().toISOString(),
           due_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
@@ -240,12 +240,12 @@ function Index() {
       status: c.status,
       notes: c.notes || null,
       // Field baru - safe handling untuk import
-      phone_number: c.phoneNumber || null,
+      phone_number: c.phone_number || null,
       address: c.address || null,
-      package_name: c.packageName || null,
+      package_name: c.package_name || null,
       latitude: c.latitude || null,
       longitude: c.longitude || null,
-      photo_url: c.photoUrl || null,
+      photo_url: c.photo_url || null,
       user_id: user.id,
       created_at: new Date().toISOString(),
       due_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],

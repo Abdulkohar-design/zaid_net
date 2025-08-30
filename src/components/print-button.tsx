@@ -114,7 +114,7 @@ export function PrintButton({ customer, variant = "outline", size = "sm" }: Prin
         </div>
         <div class="row">
             <span>Paket Internet:</span>
-            <span>${customer.packageName || 'Paket Internet'}</span>
+                            <span>${customer.package_name || 'Paket Internet'}</span>
         </div>
         <div class="row">
             <span>Alamat:</span>
@@ -122,7 +122,7 @@ export function PrintButton({ customer, variant = "outline", size = "sm" }: Prin
         </div>
         <div class="row">
             <span>Telepon:</span>
-            <span>${customer.phoneNumber || '-'}</span>
+                            <span>${customer.phone_number || '-'}</span>
         </div>
         <div class="row">
             <span>Tanggal Jatuh Tempo:</span>
