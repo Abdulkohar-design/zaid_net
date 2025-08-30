@@ -23,7 +23,7 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
     const overdueCustomers = customers.filter(customer => {
       if (customer.status !== 'pending') return false;
       
-      const dueDate = new Date(customer.dueDate);
+      const dueDate = new Date(customer.due_date);
       return dueDate < now;
     });
 
@@ -36,7 +36,7 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
     };
 
     overdueCustomers.forEach(customer => {
-      const dueDate = new Date(customer.dueDate);
+      const dueDate = new Date(customer.due_date);
       const daysDiff = Math.floor((now.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24));
       
       if (daysDiff <= 7) {
@@ -55,7 +55,7 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
       totalOverdue: overdueCustomers.length,
       totalAmount: overdueCustomers.reduce((sum, customer) => sum + customer.amount, 0),
       allOverdue: overdueCustomers.map(customer => {
-        const dueDate = new Date(customer.dueDate);
+        const dueDate = new Date(customer.due_date);
         const daysDiff = Math.floor((now.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24));
         return { ...customer, daysDiff };
       })
@@ -99,7 +99,7 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
       'Nama Pelanggan': customer.name,
       'Paket Internet': customer.packageName || '-',
       'Nominal': customer.amount,
-      'Jatuh Tempo': formatDate(customer.dueDate),
+      'Jatuh Tempo': formatDate(customer.due_date),
       'Hari Terlambat': customer.daysDiff,
       'No. WhatsApp': customer.phoneNumber || '-',
       'Alamat': customer.address || '-',
@@ -141,7 +141,7 @@ export function OverdueBills({ customers }: OverdueBillsProps) {
 👤 *Nama:* ${customer.name}
 📦 *Paket:* ${customer.packageName || 'Paket Internet'}
 💰 *Nominal:* ${formatCurrency(customer.amount)}
-📅 *Jatuh Tempo:* ${formatDate(customer.dueDate)}
+📅 *Jatuh Tempo:* ${formatDate(customer.due_date)}
 ⏰ *Terlambat:* ${customer.daysDiff} hari
 
 ⚠️ *PEMBERITAHUAN PENTING*
@@ -290,7 +290,7 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
                       <td className="border border-gray-300 px-4 py-2 font-medium text-red-600">
                         {formatCurrency(customer.amount)}
                       </td>
-                      <td className="border border-gray-300 px-4 py-2">{formatDate(customer.dueDate)}</td>
+                      <td className="border border-gray-300 px-4 py-2">{formatDate(customer.due_date)}</td>
                       <td className="border border-gray-300 px-4 py-2">
                         <Badge className={getCategoryColor(
                           customer.daysDiff <= 7 ? '1-7 hari' : 
@@ -329,3 +329,4 @@ Tagihan Anda sudah melewati batas jatuh tempo. Mohon segera lakukan pembayaran u
     </div>
   );
 }
+

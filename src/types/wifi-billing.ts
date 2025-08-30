@@ -5,8 +5,8 @@ export interface CustomerBill {
   status: 'pending' | 'paid';
   paymentMethod?: 'transfer' | 'cash';
   notes?: string;
-  dueDate: Date;
-  createdAt: Date;
+  due_date: Date;
+  created_at: Date;
   phoneNumber?: string;
   address?: string;
   packageName?: string;

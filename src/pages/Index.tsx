@@ -119,9 +119,9 @@ function Index() {
         name: item.name,
         amount: Number(item.amount),
         status: item.status as 'paid' | 'pending',
-        createdAt: item.created_at,
+        created_at: item.created_at,
         notes: item.notes || '',
-        dueDate: item.due_date,
+        due_date: item.due_date,
         // Field baru - safe handling untuk data lama
         phoneNumber: item.phone_number || '',
         address: item.address || '',
@@ -192,7 +192,7 @@ function Index() {
     }
   };
 
-  const handleAddCustomer = async (customer: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>) => {
+  const handleAddCustomer = async (customer: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>) => {
     if (!user) {
       toast({ title: "Error", description: "Anda harus login untuk menambah pelanggan.", variant: "destructive" });
       return;
@@ -228,7 +228,7 @@ function Index() {
     }
   };
 
-  const handleImportCustomers = async (newCustomers: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>[]) => {
+  const handleImportCustomers = async (newCustomers: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>[]) => {
     if (!user) {
       toast({ title: "Error", description: "Anda harus login untuk mengimpor pelanggan.", variant: "destructive" });
       return;

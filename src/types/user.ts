@@ -5,6 +5,7 @@ export interface User {
   role: 'admin' | 'pegawai';
   employee_tagihan_table_name?: string;
   isActive: boolean;
-  createdAt: Date;
+  created_at: Date;
   lastLogin?: Date;
 }
+

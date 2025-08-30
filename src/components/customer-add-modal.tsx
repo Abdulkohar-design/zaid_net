@@ -15,7 +15,7 @@ import {
 interface CustomerAddModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAdd: (customer: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>) => void;
+  onAdd: (customer: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>) => void;
 }
 
 export function CustomerAddModal({ isOpen, onClose, onAdd }: CustomerAddModalProps) {

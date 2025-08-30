@@ -126,7 +126,7 @@ export function PrintButton({ customer, variant = "outline", size = "sm" }: Prin
         </div>
         <div class="row">
             <span>Tanggal Jatuh Tempo:</span>
-            <span>${formatDate(customer.dueDate)}</span>
+            <span>${formatDate(customer.due_date)}</span>
         </div>
         <div class="row">
             <span>Tanggal Cetak:</span>

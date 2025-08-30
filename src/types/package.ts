@@ -5,6 +5,6 @@ export interface InternetPackage {
   price: number;
   description?: string;
   isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 }

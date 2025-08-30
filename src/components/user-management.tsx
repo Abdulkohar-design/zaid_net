@@ -28,7 +28,7 @@ export function UserManagement() {
         full_name: 'Administrator ZaidNet',
         role: 'admin',
         isActive: true,
-        createdAt: new Date('2024-01-01'),
+        created_at: new Date('2024-01-01'),
         lastLogin: new Date(),
       },
       {
@@ -38,7 +38,7 @@ export function UserManagement() {
         role: 'pegawai',
         employee_tagihan_table_name: 'tagihan_adede',
         isActive: true,
-        createdAt: new Date('2024-02-01'),
+        created_at: new Date('2024-02-01'),
         lastLogin: new Date('2024-11-15'),
       },
       {
@@ -48,7 +48,7 @@ export function UserManagement() {
         role: 'pegawai',
         employee_tagihan_table_name: 'tagihan_basit',
         isActive: false,
-        createdAt: new Date('2024-03-01'),
+        created_at: new Date('2024-03-01'),
         lastLogin: new Date('2024-10-20'),
       },
     ];
@@ -75,11 +75,11 @@ export function UserManagement() {
     'tagihan_rompang_sarakan',
   ];
 
-  const handleAddUser = (userData: Omit<User, 'id' | 'createdAt'>) => {
+  const handleAddUser = (userData: Omit<User, 'id' | 'created_at'>) => {
     const newUser: User = {
       ...userData,
       id: crypto.randomUUID(),
-      createdAt: new Date(),
+      created_at: new Date(),
     };
     setUsers(prev => [...prev, newUser]);
     toast({
@@ -268,7 +268,7 @@ export function UserManagement() {
                       </Badge>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Dibuat: {formatDate(user.createdAt)}
+                      Dibuat: {formatDate(user.created_at)}
                     </p>
                     {user.lastLogin && (
                       <p className="text-xs text-muted-foreground">
@@ -328,7 +328,7 @@ export function UserManagement() {
             <UserForm 
               initialData={editingUser}
               onSubmit={(data) => {
-                handleEditUser({ ...data, id: editingUser.id, createdAt: editingUser.createdAt } as User);
+                handleEditUser({ ...data, id: editingUser.id, created_at: editingUser.created_at } as User);
                 setIsEditModalOpen(false);
                 setEditingUser(null);
               }} 
@@ -347,7 +347,7 @@ export function UserManagement() {
 
 interface UserFormProps {
   initialData?: User;
-  onSubmit: (data: Omit<User, 'id' | 'createdAt'>) => void;
+  onSubmit: (data: Omit<User, 'id' | 'created_at'>) => void;
   onCancel: () => void;
   availableTables: string[];
 }
@@ -443,3 +443,4 @@ function UserForm({ initialData, onSubmit, onCancel, availableTables }: UserForm
     </form>
   );
 }
+

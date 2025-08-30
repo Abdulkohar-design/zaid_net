@@ -17,8 +17,8 @@ interface CustomerListProps {
   customers: CustomerBill[];
   onUpdateCustomer: (id: string, customer: Partial<CustomerBill>) => void;
   onDeleteCustomer: (id: string) => void;
-  onAddCustomer: (customer: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>) => void;
-  onImportCustomers: (customers: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>[]) => void;
+  onAddCustomer: (customer: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>) => void;
+  onImportCustomers: (customers: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>[]) => void;
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
   onDeleteSelected: () => void;
@@ -119,7 +119,7 @@ export function CustomerList({
             status: 'pending' as 'pending',  
             notes: row['Catatan'] || row['catatan'] || '',  
           };  
-        }).filter(Boolean) as Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>[];  
+        }).filter(Boolean) as Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>[];  
 
         if (newCustomers.length > 0) {  
           onImportCustomers(newCustomers);  

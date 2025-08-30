@@ -316,3 +316,4 @@ FROM customer_bills;
 -- Kolom baru akan bernilai NULL untuk data lama
 -- Data baru akan menggunakan kolom baru
 -- Aplikasi akan tetap berfungsi untuk data lama dan baru
+

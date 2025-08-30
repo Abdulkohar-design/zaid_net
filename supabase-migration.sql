@@ -152,3 +152,4 @@ ON CONFLICT DO NOTHING;
 -- CREATE POLICY "Users can insert own data" ON customer_bills FOR INSERT WITH CHECK (auth.uid() = user_id);
 -- CREATE POLICY "Users can update own data" ON customer_bills FOR UPDATE USING (auth.uid() = user_id);
 -- CREATE POLICY "Users can delete own data" ON customer_bills FOR DELETE USING (auth.uid() = user_id);
+

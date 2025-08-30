@@ -176,3 +176,4 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
     </div>
   );
 }
+

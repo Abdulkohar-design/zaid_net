@@ -20,7 +20,7 @@ export function BillingCharts({ customers }: BillingChartsProps) {
       
       // Filter customers for this month
       const monthCustomers = customers.filter(customer => {
-        const customerDate = new Date(customer.createdAt);
+        const customerDate = new Date(customer.created_at);
         return customerDate.getMonth() === date.getMonth() && 
                customerDate.getFullYear() === date.getFullYear();
       });
@@ -244,3 +244,4 @@ export function BillingCharts({ customers }: BillingChartsProps) {
     </div>
   );
 }
+

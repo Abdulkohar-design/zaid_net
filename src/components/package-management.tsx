@@ -27,8 +27,8 @@ export function PackageManagement() {
         price: 150000,
         description: 'Paket internet basic untuk kebutuhan dasar',
         isActive: true,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-01'),
+        created_at: new Date('2024-01-01'),
+        updated_at: new Date('2024-01-01'),
       },
       {
         id: '2',
@@ -37,8 +37,8 @@ export function PackageManagement() {
         price: 250000,
         description: 'Paket internet premium untuk kebutuhan berat',
         isActive: true,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-01'),
+        created_at: new Date('2024-01-01'),
+        updated_at: new Date('2024-01-01'),
       },
       {
         id: '3',
@@ -47,19 +47,19 @@ export function PackageManagement() {
         price: 450000,
         description: 'Paket internet ultra cepat',
         isActive: false,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-01'),
+        created_at: new Date('2024-01-01'),
+        updated_at: new Date('2024-01-01'),
       },
     ];
     setPackages(mockPackages);
   }, []);
 
-  const handleAddPackage = (packageData: Omit<InternetPackage, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleAddPackage = (packageData: Omit<InternetPackage, 'id' | 'created_at' | 'updated_at'>) => {
     const newPackage: InternetPackage = {
       ...packageData,
       id: crypto.randomUUID(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     };
     setPackages(prev => [...prev, newPackage]);
     toast({
@@ -194,7 +194,7 @@ export function PackageManagement() {
             <PackageForm 
               initialData={editingPackage}
               onSubmit={(data) => {
-                handleEditPackage({ ...data, id: editingPackage.id, createdAt: editingPackage.createdAt, updatedAt: new Date() } as InternetPackage);
+                handleEditPackage({ ...data, id: editingPackage.id, created_at: editingPackage.created_at, updated_at: new Date() } as InternetPackage);
                 setIsEditModalOpen(false);
                 setEditingPackage(null);
               }} 
@@ -212,7 +212,7 @@ export function PackageManagement() {
 
 interface PackageFormProps {
   initialData?: InternetPackage;
-  onSubmit: (data: Omit<InternetPackage, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  onSubmit: (data: Omit<InternetPackage, 'id' | 'created_at' | 'updated_at'>) => void;
   onCancel: () => void;
 }
 

@@ -50,7 +50,7 @@ export function PaymentFilter({ customers }: PaymentFilterProps) {
     const filtered = customers.filter(customer => {
       if (customer.status !== 'paid') return false;
       
-      const customerDate = new Date(customer.createdAt);
+      const customerDate = new Date(customer.created_at);
       return customerDate >= start && customerDate <= end;
     });
 
@@ -78,8 +78,8 @@ export function PaymentFilter({ customers }: PaymentFilterProps) {
       'Nama Pelanggan': payment.name,
       'Paket Internet': payment.packageName || '-',
       'Nominal': payment.amount,
-      'Tanggal Bayar': formatDate(payment.createdAt),
-      'Jatuh Tempo': formatDate(payment.dueDate),
+              'Tanggal Bayar': formatDate(payment.created_at),
+              'Jatuh Tempo': formatDate(payment.due_date),
       'No. WhatsApp': payment.phoneNumber || '-',
       'Alamat': payment.address || '-',
       'Catatan': payment.notes || '-'
@@ -199,7 +199,7 @@ export function PaymentFilter({ customers }: PaymentFilterProps) {
                         <td className="border border-gray-300 px-4 py-2 font-medium text-green-600">
                           {formatCurrency(payment.amount)}
                         </td>
-                        <td className="border border-gray-300 px-4 py-2">{formatDate(payment.createdAt)}</td>
+                        <td className="border border-gray-300 px-4 py-2">{formatDate(payment.created_at)}</td>
                         <td className="border border-gray-300 px-4 py-2">{payment.phoneNumber || '-'}</td>
                       </tr>
                     ))}

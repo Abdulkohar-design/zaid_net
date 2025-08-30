@@ -6,8 +6,8 @@ import { showSuccess, showError } from '@/utils/toast';
 // Helper function to parse dates from Supabase string format to Date objects
 const parseCustomerDates = (customer: any): CustomerBill => ({
   ...customer,
-  dueDate: customer.due_date ? new Date(customer.due_date) : new Date(),
-  createdAt: customer.created_at ? new Date(customer.created_at) : new Date(),
+      due_date: customer.due_date ? new Date(customer.due_date) : new Date(),
+    created_at: customer.created_at ? new Date(customer.created_at) : new Date(),
 });
 
 export const useCustomerBills = (tableName: string) => {
@@ -101,7 +101,7 @@ export const useCustomerBills = (tableName: string) => {
     setLoading(false);
   };
 
-  const addCustomer = async (customer: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>) => {
+  const addCustomer = async (customer: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>) => {
     const { data, error } = await supabase
       .from(tableName)
       .insert([
@@ -134,7 +134,7 @@ export const useCustomerBills = (tableName: string) => {
         amount: updates.amount,
         status: updates.status,
         notes: updates.notes,
-        due_date: updates.dueDate instanceof Date ? updates.dueDate.toISOString() : undefined,
+        due_date: updates.due_date instanceof Date ? updates.due_date.toISOString() : undefined,
       })
       .eq('id', id)
       .select();
@@ -179,7 +179,7 @@ export const useCustomerBills = (tableName: string) => {
     }
   };
 
-  const importCustomers = async (newCustomers: Omit<CustomerBill, 'id' | 'createdAt' | 'dueDate'>[]) => {
+  const importCustomers = async (newCustomers: Omit<CustomerBill, 'id' | 'created_at' | 'due_date'>[]) => {
     const customersToInsert = newCustomers.map(customer => ({
       name: customer.name,
       amount: customer.amount,

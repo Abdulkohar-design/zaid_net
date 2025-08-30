@@ -197,7 +197,7 @@ export function CustomerMap({ customers }: CustomerMapProps) {
                   <div className="flex items-center justify-between mt-4">
                     <div className="text-sm text-muted-foreground">
                       Paket: {customer.packageName || 'Tidak ada'} | 
-                      Jatuh Tempo: {formatDate(customer.dueDate)}
+                      Jatuh Tempo: {formatDate(customer.due_date)}
                     </div>
 
                     <div className="flex gap-2">
@@ -306,3 +306,4 @@ export function CustomerMap({ customers }: CustomerMapProps) {
     </div>
   );
 }
+

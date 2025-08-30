@@ -26,7 +26,7 @@ export function WhatsAppButton({ customer, variant = "outline", size = "sm" }: W
 
   const generateWhatsAppMessage = () => {
     const statusText = customer.status === 'pending' ? '⚠️ BELUM LUNAS' : '✅ SUDAH LUNAS';
-    const dueDate = formatDate(customer.dueDate);
+    const dueDate = formatDate(customer.due_date);
     const amount = formatCurrency(customer.amount);
     
     return `🌐 *TAGIHAN INTERNET - ZAIDNET*

@@ -301,3 +301,4 @@ export function LocationPicker({ latitude, longitude, onLocationChange, customer
     </div>
   );
 }
+

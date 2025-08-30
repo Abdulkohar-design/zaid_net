@@ -128,7 +128,7 @@ export const exportToWord = (customers: any[], stats: any, employeeName: string)
   customers.forEach((customer, index) => {
     const statusClass = customer.status === 'paid' ? 'paid' : 'pending';
     const statusText = customer.status === 'paid' ? 'LUNAS' : 'BELUM BAYAR';
-    const createdDate = new Date(customer.createdAt).toLocaleDateString('id-ID');
+    const createdDate = new Date(customer.created_at).toLocaleDateString('id-ID');
     
     htmlContent += `
       <tr>

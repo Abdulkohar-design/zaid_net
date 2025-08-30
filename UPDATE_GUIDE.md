@@ -143,3 +143,4 @@ SELECT COUNT(*) as with_gps FROM customer_bills WHERE latitude IS NOT NULL AND l
 2. **Tambah pelanggan baru** dengan fitur lengkap  
 3. **Update data lama** secara bertahap sesuai kebutuhan
 4. **Nikmati fitur baru** tanpa kehilangan data!
+
