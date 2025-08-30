@@ -3,6 +3,7 @@ import { Camera, Upload, X, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PhotoUploadProps {
   currentPhotoUrl?: string;
@@ -17,7 +18,39 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadToSupabase = async (file: File): Promise<string | null> => {
+    try {
+      // Generate unique filename
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${customerName.replace(/\s+/g, '_')}_${Date.now()}.${fileExt}`;
+      const filePath = `customer-photos/${fileName}`;
+
+      // Upload to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from('customer-photos')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) {
+        console.error('Upload error:', error);
+        throw error;
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from('customer-photos')
+        .getPublicUrl(filePath);
+
+      return urlData.publicUrl;
+    } catch (error) {
+      console.error('Upload failed:', error);
+      throw error;
+    }
+  };
+
+  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -43,33 +76,51 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
 
     setIsUploading(true);
 
-    // Create preview URL
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
-      setPreviewUrl(result);
-      onPhotoChange(result);
-      setIsUploading(false);
+    try {
+      // Upload to Supabase Storage
+      const uploadedUrl = await uploadToSupabase(file);
       
+      if (uploadedUrl) {
+        setPreviewUrl(uploadedUrl);
+        onPhotoChange(uploadedUrl);
+        
+        toast({
+          title: "Foto Berhasil Diupload",
+          description: `Foto rumah ${customerName} telah diperbarui`,
+        });
+      }
+    } catch (error: any) {
       toast({
-        title: "Foto Berhasil Diupload",
-        description: `Foto rumah ${customerName} telah diperbarui`,
-      });
-    };
-
-    reader.onerror = () => {
-      setIsUploading(false);
-      toast({
-        title: "Error",
-        description: "Gagal memproses file gambar",
+        title: "Upload Gagal",
+        description: error.message || "Gagal mengupload foto ke server",
         variant: "destructive"
       });
-    };
-
-    reader.readAsDataURL(file);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
-  const handleRemovePhoto = () => {
+  const handleRemovePhoto = async () => {
+    if (currentPhotoUrl && currentPhotoUrl.includes('supabase.co')) {
+      try {
+        // Extract file path from URL
+        const urlParts = currentPhotoUrl.split('/');
+        const fileName = urlParts[urlParts.length - 1];
+        const filePath = `customer-photos/${fileName}`;
+
+        // Delete from Supabase Storage
+        const { error } = await supabase.storage
+          .from('customer-photos')
+          .remove([filePath]);
+
+        if (error) {
+          console.error('Delete error:', error);
+        }
+      } catch (error) {
+        console.error('Delete failed:', error);
+      }
+    }
+
     setPreviewUrl(null);
     onPhotoChange(null);
     if (fileInputRef.current) {
@@ -104,7 +155,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
             <div className="flex gap-2 justify-center">
               <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="outline" size="sm">
+                  <Button type="button" variant="outline" size="sm">
                     <Eye className="h-4 w-4 mr-1" />
                     Lihat
                   </Button>
@@ -124,6 +175,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
               </Dialog>
               
               <Button 
+                type="button"
                 variant="outline" 
                 size="sm" 
                 onClick={triggerFileInput}
@@ -134,6 +186,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
               </Button>
               
               <Button 
+                type="button"
                 variant="outline" 
                 size="sm" 
                 onClick={handleRemovePhoto}
@@ -151,6 +204,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
               Belum ada foto rumah untuk {customerName}
             </p>
             <Button 
+              type="button"
               variant="outline" 
               onClick={triggerFileInput}
               disabled={isUploading}
