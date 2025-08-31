@@ -176,7 +176,9 @@ export function CustomerList({
               className="w-full max-w-md px-3 py-2 border rounded-md text-sm"
             />
           </div>
-          <div className="overflow-x-auto">
+          
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
@@ -260,6 +262,83 @@ export function CustomerList({
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-3">
+            {filteredCustomers.map((customer, index) => (
+              <div key={customer.id} className="border rounded-lg p-4 bg-white shadow-sm">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <Checkbox
+                      checked={selectedIds.includes(customer.id)}
+                      onCheckedChange={(checked) => handleSelectOne(customer.id, !!checked)}
+                      aria-label={`Pilih ${customer.name}`}
+                    />
+                    <div>
+                      <div className="font-medium text-sm">{customer.name}</div>
+                      <div className="text-xs text-gray-500">No. {index + 1}</div>
+                    </div>
+                  </div>
+                  <Badge
+                    variant={customer.status === 'paid' ? 'default' : 'destructive'}
+                    className={customer.status === 'paid' ? 'bg-green-500' : ''}
+                  >
+                    {customer.status === 'paid' ? 'Lunas' : 'Belum Bayar'}
+                  </Badge>
+                </div>
+                
+                <div className="mb-3">
+                  <div className="text-sm font-semibold text-green-600">
+                    Rp {formatCurrency(customer.amount)}
+                  </div>
+                </div>
+
+                <div className="flex gap-2 flex-wrap">
+                  {customer.status === 'pending' ? (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleMarkPaid(customer.id)}
+                      className="h-8 px-2 text-xs"
+                    >
+                      <Check className="h-3 w-3 mr-1" />
+                      Lunas
+                    </Button>
+                  ) : (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleMarkPending(customer.id)}
+                      className="h-8 px-2 text-xs"
+                    >
+                      <X className="h-3 w-3 mr-1" />
+                      Belum Bayar
+                    </Button>
+                  )}
+                  <WhatsAppButton customer={customer} />
+                  <PrintButton customer={customer} />
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleEdit(customer)}
+                    className="h-8 px-2 text-xs"
+                  >
+                    <Edit className="h-3 w-3 mr-1" />
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleDelete(customer.id)}
+                    className="h-8 px-2 text-xs text-red-600 hover:text-red-700"
+                  >
+                    <Trash2 className="h-3 w-3 mr-1" />
+                    Hapus
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>

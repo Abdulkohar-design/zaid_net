@@ -49,16 +49,16 @@ export function FeatureInfo() {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className="space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Fitur Utama</CardTitle>
+                <CardTitle className="text-base sm:text-lg">Fitur Utama</CardTitle>
               </CardHeader>
               <CardContent>
-                <ol className="space-y-2 text-sm">
+                <ol className="space-y-2 text-xs sm:text-sm">
                   {mainFeatures.map((feature, index) => (
                     <li key={index} className="flex">
-                      <span className="font-semibold mr-2">{index + 1}.</span>
+                      <span className="font-semibold mr-2 flex-shrink-0">{index + 1}.</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -68,14 +68,14 @@ export function FeatureInfo() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Update Versi 2</CardTitle>
-                <p className="text-sm text-muted-foreground">Fitur Grafik dan Analitik</p>
+                <CardTitle className="text-base sm:text-lg">Update Versi 2</CardTitle>
+                <p className="text-xs sm:text-sm text-muted-foreground">Fitur Grafik dan Analitik</p>
               </CardHeader>
               <CardContent>
-                <ol className="space-y-2 text-sm" start={8}>
+                <ol className="space-y-2 text-xs sm:text-sm" start={8}>
                   {version2Features.map((feature, index) => (
                     <li key={index} className="flex">
-                      <span className="font-semibold mr-2">{index + 8}.</span>
+                      <span className="font-semibold mr-2 flex-shrink-0">{index + 8}.</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -85,14 +85,14 @@ export function FeatureInfo() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Update Versi 3</CardTitle>
-                <p className="text-sm text-muted-foreground">Fitur Geolokasi & Enhanced UX</p>
+                <CardTitle className="text-base sm:text-lg">Update Versi 3</CardTitle>
+                <p className="text-xs sm:text-sm text-muted-foreground">Fitur Geolokasi & Enhanced UX</p>
               </CardHeader>
               <CardContent>
-                <ol className="space-y-2 text-sm">
+                <ol className="space-y-2 text-xs sm:text-sm">
                   {version3Features.map((feature, index) => (
                     <li key={index} className="flex">
-                      <span className="font-semibold mr-2">{index + 1}.</span>
+                      <span className="font-semibold mr-2 flex-shrink-0">{index + 1}.</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -103,7 +103,7 @@ export function FeatureInfo() {
           
           <Card className="bg-blue-50 dark:bg-blue-950">
             <CardContent className="pt-6">
-              <p className="text-sm text-blue-800 dark:text-blue-200">
+              <p className="text-xs sm:text-sm text-blue-800 dark:text-blue-200">
                 <strong>Deployment:</strong> Aplikasi berbasis web bisa Online dan Offline. 
                 Untuk offline bisa diinstall di PC/Laptop, untuk online wajib memiliki domain dan hosting.
               </p>

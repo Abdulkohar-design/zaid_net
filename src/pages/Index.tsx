@@ -315,18 +315,18 @@ function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col">
-      <header className="flex items-center justify-between p-4 border-b dark:border-gray-700">
-        <div>
-          <h1 className="text-2xl font-bold">ZaidNet - WiFi Billing System</h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Aplikasi berbasis web bisa Online dan Offline - Sistem Manajemen Tagihan Internet</p>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col overflow-hidden">
+      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border-b dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+        <div className="mb-4 sm:mb-0">
+          <h1 className="text-xl sm:text-2xl font-bold">ZaidNet - WiFi Billing System</h1>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Aplikasi berbasis web bisa Online dan Offline - Sistem Manajemen Tagihan Internet</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button variant="outline" className="flex items-center gap-2 w-full sm:w-auto text-sm">
                 <Users className="h-4 w-4" />
-                <span>{employeeName}</span>
+                <span className="truncate">{employeeName}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
@@ -352,8 +352,9 @@ function Index() {
           {loggedInUserRole === 'admin' && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex items-center gap-2">
-                  Tabel: {currentTable}
+                <Button variant="outline" className="flex items-center gap-2 w-full sm:w-auto text-sm">
+                  <span className="hidden sm:inline">Tabel:</span>
+                  <span className="truncate">{currentTable}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
@@ -372,22 +373,22 @@ function Index() {
         </div>
       </header>
 
-      <main className="flex-1 p-4">
+      <main className="flex-1 overflow-auto p-2 sm:p-4">
         <FeatureInfo />
         
-        <Tabs defaultValue="dashboard" className="mt-6">
-          <TabsList className="grid w-full grid-cols-8">
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="customers">Data Pelanggan</TabsTrigger>
-            <TabsTrigger value="packages">Paket Internet</TabsTrigger>
-            <TabsTrigger value="payments">Pembayaran Masuk</TabsTrigger>
-            <TabsTrigger value="charts">Grafik & Analitik</TabsTrigger>
-            <TabsTrigger value="overdue">Data Tunggakan</TabsTrigger>
-            <TabsTrigger value="map">Map Lokasi</TabsTrigger>
-            <TabsTrigger value="users">Setting User</TabsTrigger>
+        <Tabs defaultValue="dashboard" className="mt-4 sm:mt-6">
+          <TabsList className="grid w-full grid-cols-4 sm:grid-cols-8 gap-1 sm:gap-2 h-auto">
+            <TabsTrigger value="dashboard" className="text-xs sm:text-sm py-2">Dashboard</TabsTrigger>
+            <TabsTrigger value="customers" className="text-xs sm:text-sm py-2">Data Pelanggan</TabsTrigger>
+            <TabsTrigger value="packages" className="text-xs sm:text-sm py-2">Paket Internet</TabsTrigger>
+            <TabsTrigger value="payments" className="text-xs sm:text-sm py-2">Pembayaran</TabsTrigger>
+            <TabsTrigger value="charts" className="text-xs sm:text-sm py-2">Grafik</TabsTrigger>
+            <TabsTrigger value="overdue" className="text-xs sm:text-sm py-2">Tunggakan</TabsTrigger>
+            <TabsTrigger value="map" className="text-xs sm:text-sm py-2">Map</TabsTrigger>
+            <TabsTrigger value="users" className="text-xs sm:text-sm py-2">Setting</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="dashboard" className="space-y-4">
+          <TabsContent value="dashboard" className="space-y-4 mt-4">
             <BillingStatsComponent stats={stats} />
             <Separator className="my-4" />
             <div className="grid gap-4">
@@ -405,7 +406,7 @@ function Index() {
             </div>
           </TabsContent>
           
-          <TabsContent value="customers" className="space-y-4">
+          <TabsContent value="customers" className="space-y-4 mt-4">
             <CustomerList
               customers={customers}
               onUpdateCustomer={handleUpdateCustomer}
@@ -418,27 +419,27 @@ function Index() {
             />
           </TabsContent>
           
-          <TabsContent value="packages" className="space-y-4">
+          <TabsContent value="packages" className="space-y-4 mt-4">
             <PackageManagement />
           </TabsContent>
           
-          <TabsContent value="payments" className="space-y-4">
+          <TabsContent value="payments" className="space-y-4 mt-4">
             <PaymentFilter customers={customers} />
           </TabsContent>
 
-          <TabsContent value="charts" className="space-y-4">
+          <TabsContent value="charts" className="space-y-4 mt-4">
             <BillingCharts customers={customers} />
           </TabsContent>
 
-          <TabsContent value="overdue" className="space-y-4">
+          <TabsContent value="overdue" className="space-y-4 mt-4">
             <OverdueBills customers={customers} />
           </TabsContent>
 
-          <TabsContent value="map" className="space-y-4">
+          <TabsContent value="map" className="space-y-4 mt-4">
             <CustomerMap customers={customers} />
           </TabsContent>
 
-          <TabsContent value="users" className="space-y-4">
+          <TabsContent value="users" className="space-y-4 mt-4">
             <UserManagement />
           </TabsContent>
         </Tabs>
