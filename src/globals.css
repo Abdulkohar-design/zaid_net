@@ -98,4 +98,51 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Mobile modal scrolling fix */
+  @media (max-width: 640px) {
+    [data-radix-dialog-content] {
+      max-height: 90vh !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      position: fixed !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 95vw !important;
+      max-width: none !important;
+    }
+
+    /* Force scrolling on modal content */
+    .modal-content {
+      height: 90vh !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Ensure all overflow elements can scroll */
+    .overflow-y-auto {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+  }
+
+  /* Better scrollbar styling */
+  .modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
 }

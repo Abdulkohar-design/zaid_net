@@ -41,94 +41,106 @@ export function CustomerEditModal({ customer, isOpen, onClose, onSave }: Custome
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Edit Data Pelanggan</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label>Nama Pelanggan</Label>
-            <Input
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-          </div>
-          <div>
-            <Label>Nominal Tagihan (Rp)</Label>
-            <Input
-              type="number"
-              min="0"
-              value={formData.amount}
-              onChange={(e) => setFormData({ ...formData, amount: parseInt(e.target.value) || 0 })}
-              required
-            />
-          </div>
-          <div>
-            <Label>Status</Label>
-            <select
-              value={formData.status}
-              onChange={(e) => setFormData({ ...formData, status: e.target.value as 'paid' | 'pending' })}
-              className="w-full p-2 border rounded-md"
-            >
-              <option value="pending">Belum Bayar</option>
-              <option value="paid">Lunas</option>
-            </select>
-          </div>
-          <div>
-            <Label>Nomor WhatsApp</Label>
-            <Input
-              type="tel"
-              placeholder="08xxxxxxxxxx"
-              value={formData.phone_number || ''}
-              onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
-            />
-          </div>
-          <div>
-            <Label>Alamat</Label>
-            <Input
-              placeholder="Alamat lengkap pelanggan"
-              value={formData.address || ''}
-              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-            />
-          </div>
-          <div>
-            <Label>Paket Internet</Label>
-            <Input
-              placeholder="Nama paket (misal: 10 Mbps, 20 Mbps)"
-              value={formData.package_name || ''}
-              onChange={(e) => setFormData({ ...formData, package_name: e.target.value })}
-            />
-          </div>
-          <LocationPicker
-            latitude={formData.latitude}
-            longitude={formData.longitude}
-            onLocationChange={(lat, lng) => setFormData({ ...formData, latitude: lat, longitude: lng })}
-            customerName={formData.name || 'Pelanggan'}
-          />
+      <DialogContent className="max-h-[90vh] overflow-y-auto modal-content">
+        <div className="h-full flex flex-col">
+          <DialogHeader className="flex-shrink-0">
+            <DialogTitle className="text-lg sm:text-xl">Edit Data Pelanggan</DialogTitle>
+          </DialogHeader>
           
-          <PhotoUpload
-            currentPhotoUrl={formData.photo_url}
-            onPhotoChange={(photoUrl) => setFormData({ ...formData, photo_url: photoUrl || '' })}
-            customerName={formData.name || 'Pelanggan'}
-          />
-          
-          <div>
-            <Label>Catatan (Opsional)</Label>
-            <Input
-              value={formData.notes || ''}
-              onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            />
+          <div className="flex-1 overflow-y-auto min-h-0">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Nama Pelanggan</Label>
+                <Input
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="text-sm sm:text-base"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Nominal Tagihan (Rp)</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  value={formData.amount}
+                  onChange={(e) => setFormData({ ...formData, amount: parseInt(e.target.value) || 0 })}
+                  required
+                  className="text-sm sm:text-base"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Status</Label>
+                <select
+                  value={formData.status}
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value as 'paid' | 'pending' })}
+                  className="w-full p-2 border rounded-md text-sm sm:text-base"
+                >
+                  <option value="pending">Belum Bayar</option>
+                  <option value="paid">Lunas</option>
+                </select>
+              </div>
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Nomor WhatsApp</Label>
+                <Input
+                  type="tel"
+                  placeholder="08xxxxxxxxxx"
+                  value={formData.phone_number || ''}
+                  onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                  className="text-sm sm:text-base"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Alamat</Label>
+                <Input
+                  placeholder="Alamat lengkap pelanggan"
+                  value={formData.address || ''}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  className="text-sm sm:text-base"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Paket Internet</Label>
+                <Input
+                  placeholder="Nama paket (misal: 10 Mbps, 20 Mbps)"
+                  value={formData.package_name || ''}
+                  onChange={(e) => setFormData({ ...formData, package_name: e.target.value })}
+                  className="text-sm sm:text-base"
+                />
+              </div>
+              <LocationPicker
+                latitude={formData.latitude}
+                longitude={formData.longitude}
+                onLocationChange={(lat, lng) => setFormData({ ...formData, latitude: lat, longitude: lng })}
+                customerName={formData.name || 'Pelanggan'}
+              />
+              
+              <PhotoUpload
+                currentPhotoUrl={formData.photo_url}
+                onPhotoChange={(photoUrl) => setFormData({ ...formData, photo_url: photoUrl || '' })}
+                customerName={formData.name || 'Pelanggan'}
+              />
+              
+              <div className="space-y-1">
+                <Label className="text-sm sm:text-base">Catatan (Opsional)</Label>
+                <Input
+                  value={formData.notes || ''}
+                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                  className="text-sm sm:text-base"
+                />
+              </div>
+            </form>
           </div>
-          <div className="flex gap-2 justify-end">
-            <Button type="button" variant="outline" onClick={onClose}>
+          
+          <div className="flex flex-col sm:flex-row gap-2 justify-end pt-4 flex-shrink-0">
+            <Button type="button" variant="outline" onClick={onClose} className="w-full sm:w-auto">
               Batal
             </Button>
-            <Button type="submit">
+            <Button type="submit" onClick={handleSubmit} className="w-full sm:w-auto">
               Simpan
             </Button>
           </div>
-        </form>
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -139,36 +139,36 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
 
   return (
     <div className="space-y-2">
-      <label className="text-sm font-medium">Foto Rumah</label>
+      <label className="text-sm sm:text-base font-medium">Foto Rumah</label>
       
-      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+      <div className="border-2 border-dashed border-gray-300 rounded-lg p-3 sm:p-4">
         {previewUrl ? (
           <div className="space-y-3">
             <div className="relative">
               <img 
                 src={previewUrl} 
                 alt={`Rumah ${customerName}`}
-                className="w-full h-32 object-cover rounded-lg"
+                className="w-full h-24 sm:h-32 object-cover rounded-lg"
               />
             </div>
             
-            <div className="flex gap-2 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2 justify-center">
               <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
                 <DialogTrigger asChild>
-                  <Button type="button" variant="outline" size="sm">
+                  <Button type="button" variant="outline" size="sm" className="w-full sm:w-auto">
                     <Eye className="h-4 w-4 mr-1" />
                     Lihat
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-2xl">
+                <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto modal-content">
                   <DialogHeader>
-                    <DialogTitle>Foto Rumah {customerName}</DialogTitle>
+                    <DialogTitle className="text-lg sm:text-xl">Foto Rumah {customerName}</DialogTitle>
                   </DialogHeader>
                   <div className="flex justify-center">
                     <img 
                       src={previewUrl} 
                       alt={`Rumah ${customerName}`}
-                      className="max-w-full max-h-96 object-contain rounded-lg"
+                      className="max-w-full max-h-64 sm:max-h-96 object-contain rounded-lg"
                     />
                   </div>
                 </DialogContent>
@@ -180,6 +180,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
                 size="sm" 
                 onClick={triggerFileInput}
                 disabled={isUploading}
+                className="w-full sm:w-auto"
               >
                 <Camera className="h-4 w-4 mr-1" />
                 {isUploading ? 'Uploading...' : 'Ganti'}
@@ -190,7 +191,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
                 variant="outline" 
                 size="sm" 
                 onClick={handleRemovePhoto}
-                className="text-red-600 hover:text-red-700"
+                className="text-red-600 hover:text-red-700 w-full sm:w-auto"
               >
                 <X className="h-4 w-4 mr-1" />
                 Hapus
@@ -198,9 +199,9 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
             </div>
           </div>
         ) : (
-          <div className="text-center py-8">
-            <Camera className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-sm text-gray-600 mb-4">
+          <div className="text-center py-6 sm:py-8">
+            <Camera className="h-8 w-8 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+            <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
               Belum ada foto rumah untuk {customerName}
             </p>
             <Button 
@@ -208,6 +209,7 @@ export function PhotoUpload({ currentPhotoUrl, onPhotoChange, customerName }: Ph
               variant="outline" 
               onClick={triggerFileInput}
               disabled={isUploading}
+              className="w-full sm:w-auto"
             >
               <Upload className="h-4 w-4 mr-2" />
               {isUploading ? 'Uploading...' : 'Upload Foto'}
