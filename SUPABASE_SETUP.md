@@ -35,7 +35,6 @@ Aplikasi mendukung multiple tabel untuk pembagian wilayah:
 - `tagihan_yeyen`
 - `tagihan_yono`
 - `tagihan_nia`
-- `tagihan_rudi`
 - `tagihan_rompang_sarakan`
 
 ### 4. Field Mapping Database ke Aplikasi

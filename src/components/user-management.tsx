@@ -71,7 +71,6 @@ export function UserManagement() {
     'tagihan_yeyen',
     'tagihan_yono',
     'tagihan_nia',
-    'tagihan_rudi',
     'tagihan_rompang_sarakan',
   ];
 

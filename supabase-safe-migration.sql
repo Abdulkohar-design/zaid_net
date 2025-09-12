@@ -209,21 +209,7 @@ END $$;
 DO $$
 BEGIN
     IF EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'tagihan_nia') THEN
-        ALTER TABLE tagihan_nia 
-        ADD COLUMN IF NOT EXISTS phone_number TEXT DEFAULT NULL,
-        ADD COLUMN IF NOT EXISTS address TEXT DEFAULT NULL,
-        ADD COLUMN IF NOT EXISTS package_name TEXT DEFAULT NULL,
-        ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8) DEFAULT NULL,
-        ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8) DEFAULT NULL,
-        ADD COLUMN IF NOT EXISTS photo_url TEXT DEFAULT NULL;
-    END IF;
-END $$;
-
--- Jika tabel tagihan_rudi ada:
-DO $$
-BEGIN
-    IF EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'tagihan_rudi') THEN
-        ALTER TABLE tagihan_rudi 
+        ALTER TABLE tagihan_nia
         ADD COLUMN IF NOT EXISTS phone_number TEXT DEFAULT NULL,
         ADD COLUMN IF NOT EXISTS address TEXT DEFAULT NULL,
         ADD COLUMN IF NOT EXISTS package_name TEXT DEFAULT NULL,

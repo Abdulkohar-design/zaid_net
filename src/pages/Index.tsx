@@ -19,6 +19,7 @@ import { BillingExport } from "@/components/billing-export";
 import { FeatureInfo } from "@/components/feature-info";
 import { PackageManagement } from "@/components/package-management";
 import { PaymentFilter } from "@/components/payment-filter";
+import { PaymentStatusFilter } from "@/components/payment-status-filter";
 import { BillingCharts } from "@/components/billing-charts";
 import { OverdueBills } from "@/components/overdue-bills";
 import { UserManagement } from "@/components/user-management";
@@ -37,6 +38,7 @@ function Index() {
   const [isNameEditModalOpen, setIsNameEditModalOpen] = useState(false);
   const [isPasswordEditModalOpen, setIsPasswordEditModalOpen] = useState(false); // ✅ State baru untuk modal password
   const [customers, setCustomers] = useState<CustomerBill[]>([]);
+  const [filteredCustomers, setFilteredCustomers] = useState<CustomerBill[]>([]);
   const [stats, setStats] = useState<BillingStats>({
     totalCustomers: 0,
     totalPending: 0,
@@ -69,7 +71,6 @@ function Index() {
     'tagihan_yeyen',
     'tagihan_yono',
     'tagihan_nia',
-    'tagihan_rudi',
     'tagihan_rompang_sarakan',
   ];
 
@@ -134,6 +135,7 @@ function Index() {
         photo_url: item.photo_url || '',
       }));
       setCustomers(customersData);
+      setFilteredCustomers(customersData);
 
       // Statistik
       const totalCustomers = customersData.length;
@@ -291,6 +293,10 @@ function Index() {
     }
   };
 
+  const handleFilterChange = (filtered: CustomerBill[]) => {
+    setFilteredCustomers(filtered);
+  };
+
   const handleSaveEmployeeName = async (newName: string) => {
     if (!user) {
       toast({ title: "Error", description: "Profil tidak ditemukan.", variant: "destructive" });
@@ -415,8 +421,9 @@ function Index() {
           </TabsContent>
           
           <TabsContent value="customers" className="space-y-4 mt-4">
+            <PaymentStatusFilter customers={customers} onFilterChange={handleFilterChange} />
             <CustomerList
-              customers={customers}
+              customers={filteredCustomers}
               onUpdateCustomer={handleUpdateCustomer}
               onDeleteCustomer={handleDeleteCustomer}
               onAddCustomer={handleAddCustomer}

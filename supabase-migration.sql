@@ -109,13 +109,6 @@ ALTER TABLE tagihan_nia ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8);
 ALTER TABLE tagihan_nia ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8);
 ALTER TABLE tagihan_nia ADD COLUMN IF NOT EXISTS photo_url TEXT;
 
-ALTER TABLE tagihan_rudi ADD COLUMN IF NOT EXISTS phone_number TEXT;
-ALTER TABLE tagihan_rudi ADD COLUMN IF NOT EXISTS address TEXT;
-ALTER TABLE tagihan_rudi ADD COLUMN IF NOT EXISTS package_name TEXT;
-ALTER TABLE tagihan_rudi ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8);
-ALTER TABLE tagihan_rudi ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8);
-ALTER TABLE tagihan_rudi ADD COLUMN IF NOT EXISTS photo_url TEXT;
-
 ALTER TABLE tagihan_rompang_sarakan ADD COLUMN IF NOT EXISTS phone_number TEXT;
 ALTER TABLE tagihan_rompang_sarakan ADD COLUMN IF NOT EXISTS address TEXT;
 ALTER TABLE tagihan_rompang_sarakan ADD COLUMN IF NOT EXISTS package_name TEXT;
