@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Check, X, Edit, Trash2, Plus, Upload } from "lucide-react";
+import { Check, X, Edit, Trash2, Plus, Upload, ArrowRightLeft } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { showSuccess, showError } from "@/utils/toast";
 import { CustomerEditModal } from "./customer-edit-modal";
@@ -62,8 +62,13 @@ export function CustomerList({
   };
 
   const handleMarkPaid = (id: string) => {
-    onUpdateCustomer(id, { status: 'paid' });
+    onUpdateCustomer(id, { status: 'paid', paymentMethod: 'cash' });
     showSuccess('Tagihan berhasil ditandai sebagai lunas');
+  };
+
+  const handleMarkTransfer = (id: string) => {
+    onUpdateCustomer(id, { status: 'paid', paymentMethod: 'transfer' });
+    showSuccess('Tagihan berhasil ditandai sebagai lunas via transfer');
   };
 
   const handleMarkPending = (id: string) => {
@@ -220,14 +225,26 @@ export function CustomerList({
                     <td className="p-2">
                       <div className="flex gap-2">
                         {customer.status === 'pending' ? (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleMarkPaid(customer.id)}
-                            className="h-8 w-8 p-0"
-                          >
-                            <Check className="h-4 w-4" />
-                          </Button>
+                          <>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleMarkPaid(customer.id)}
+                              className="h-8 w-8 p-0"
+                              title="Lunas (Cash)"
+                            >
+                              <Check className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleMarkTransfer(customer.id)}
+                              className="h-8 w-8 p-0"
+                              title="Lunas (Transfer)"
+                            >
+                              <ArrowRightLeft className="h-4 w-4" />
+                            </Button>
+                          </>
                         ) : (
                           <Button
                             size="sm"
@@ -296,15 +313,26 @@ export function CustomerList({
 
                 <div className="flex gap-2 flex-wrap">
                   {customer.status === 'pending' ? (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleMarkPaid(customer.id)}
-                      className="h-8 px-2 text-xs"
-                    >
-                      <Check className="h-3 w-3 mr-1" />
-                      Lunas
-                    </Button>
+                    <>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleMarkPaid(customer.id)}
+                        className="h-8 px-2 text-xs"
+                      >
+                        <Check className="h-3 w-3 mr-1" />
+                        Lunas
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleMarkTransfer(customer.id)}
+                        className="h-8 px-2 text-xs"
+                      >
+                        <ArrowRightLeft className="h-3 w-3 mr-1" />
+                        Transfer
+                      </Button>
+                    </>
                   ) : (
                     <Button
                       size="sm"
